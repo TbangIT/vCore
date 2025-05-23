@@ -1,3 +1,4 @@
+repo_image_name_styled := "vOS"
 export repo_organization := env("GITHUB_REPOSITORY_OWNER", "yourname")
 export image_name := env("IMAGE_NAME", "yourimage")
 export centos_version := env("CENTOS_VERSION", "stream10")
@@ -337,7 +338,7 @@ lint:
 
 # Runs shfmt on all Bash scripts
 format:
-     #!/usr/bin/env bash
+    #!/usr/bin/env bash
     set -eoux pipefail
     # Check if shfmt is installed
     if ! command -v shfmt &> /dev/null; then
