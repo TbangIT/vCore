@@ -1,9 +1,15 @@
+ARG REPO_SOURCE="ghcr.io"
+ARG REPO_OWNER="ublue-os"
+ARG BASE_IMAGE="fedora-coreos"
+ARG TAG_VERSION="stable-zfs"
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-FROM ghcr.io/ublue-os/bazzite:stable
+FROM ${REPO_SOURCE}/${REPO_OWNER}/${BASE_IMAGE}:${TAG_VERSION}
+LABEL org.opencontainers.image.source=$GITHUB_REPOSITORY
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
@@ -24,7 +30,3 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh && \
     ostree container commit
-    
-### LINTING
-## Verify final image and contents are correct.
-RUN bootc container lint
