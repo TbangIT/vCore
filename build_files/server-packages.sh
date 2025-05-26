@@ -15,7 +15,7 @@ dnf5 install -y -q https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-rele
 
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1
 
-/ctx/cockpit_45drives.sh
+#/ctx/cockpit_45drives.sh
 
 dnf5 install -y -q "${PKGS[@]}"
 
