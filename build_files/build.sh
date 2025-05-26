@@ -4,5 +4,4 @@ set -ouex pipefail
 
 ### Install packages
 
-
-/ctx/server-packages.sh
+bash /ctx/server-packages.sh
