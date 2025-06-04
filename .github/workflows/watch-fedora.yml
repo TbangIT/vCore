@@ -1,7 +1,7 @@
 name: watch-upstream-base
 on:
-  schedule:                     # run every 30 min
-    - cron:  '*/30 * * * *'
+  #schedule:                     # run every 30 min
+  #  - cron:  '*/30 * * * *'
   workflow_dispatch:            # you can also fire it manually
 
 jobs:
