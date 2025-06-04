@@ -29,9 +29,14 @@ TERMINAL=(
    zsh
    fastfetch
    starship
+   tmux
    neovim
    inotify-tools
    tree-sitter-cli
+)
+
+RECOVERY=(
+   ddrescue
 )
 
 PKGS=(
