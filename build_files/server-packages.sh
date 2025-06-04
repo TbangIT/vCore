@@ -49,9 +49,10 @@ PKGS=(
    rclone
    ripgrep
    duperemove
-   $COCKPIT
-   $SAMBA
-   $TERMINAL
+  "${COCKPIT[@]}"
+  "${SAMBA[@]}"
+  "${TERMINAL[@]}"
+  "${RECOVERY[@]}"
 )
 
 # Enable Repos
