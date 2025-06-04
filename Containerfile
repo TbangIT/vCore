@@ -9,7 +9,7 @@ COPY build_files /
 
 # Base Image
 FROM ${REPO_SOURCE}/${REPO_OWNER}/${BASE_IMAGE}:${TAG_VERSION}
-LABEL org.opencontainers.image.source=$GITHUB_REPOSITORY
+
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
