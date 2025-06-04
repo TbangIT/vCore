@@ -15,7 +15,7 @@ jobs:
       - id: remote
         run: |
           DIGEST=$(skopeo inspect --format '{{.Digest}}' \
-                  docker://quay.io/dfedora/fedora-coreos:stable)
+                  docker://quay.io/fedora/fedora-coreos:stable)
           echo "digest=$DIGEST" >> "$GITHUB_OUTPUT"
       - id: local
         run: |
