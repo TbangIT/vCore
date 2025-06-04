@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - main
-  #schedule:
-  #  - cron: '05 10 * * *'  # 10:05am UTC everyday
+  schedule:
+    - cron: '0 4 * * SUN'  # At 04:00 AM, only on Sunday
   push:
     branches:
       - main
