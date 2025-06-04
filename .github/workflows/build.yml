@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 4 * * SUN'  # At 04:00 AM, only on Sunday
+    - cron: '0 0 * * SUN'  # At 00:00 AM on Sunday
   push:
     branches:
       - main
