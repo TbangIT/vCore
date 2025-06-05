@@ -1,4 +1,4 @@
-repo_image_name_styled := "vOS"
+repo_image_name_styled := "vCore"
 export repo_organization := env("GITHUB_REPOSITORY_OWNER", "yourname")
 export image_name := env("IMAGE_NAME", "yourimage")
 export centos_version := env("CENTOS_VERSION", "stream10")
