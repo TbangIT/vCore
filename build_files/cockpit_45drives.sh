@@ -15,7 +15,7 @@ RELEASEVER=9
 
 # Install the 45drives repo
 dnf5 config-manager addrepo \
-    --set=baseurl=https://repo.45drives.com/enterprise/rocky/el$RELEAEVER/stable/x86_64 \
+    --set=baseurl=https://repo.45drives.com/enterprise/rocky/el$RELEAEVER/stable \
     --id=45drives_enterprise \
     --set=name="45Drives Enterprise $RELEASEVER Repo" \
     --set=enabled=1 \
