@@ -13,6 +13,7 @@ COCKPIT=(
    cockpit-storaged
    cockpit-system
    cockpit-ostree
+   cockpit-image-builder
    # Fonts for Cockpit
    adwaita-mono-fonts       
    adwaita-sans-fonts
