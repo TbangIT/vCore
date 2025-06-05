@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-# cockpit-zfs-manager is already installed in /usr/share/cockpit, but not as a .rpm
-# not sure if there is any benefit to installing it this way, but here it is
-if false; then
-  dnf5 -y -q copr enable spike/znapzend >/dev/null 2>&1
-  dnf5 -y -q --setopt=install_weak_deps=False install znapzend
 
-  dnf5 -y -q install $(
-    curl -s https://api.github.com/repos/45Drives/cockpit-zfs-manager/releases/latest |
-    jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
-  )
-fi
+dnf5 -y -q copr enable spike/znapzend >/dev/null 2>&1
+dnf5 -y -q --setopt=install_weak_deps=False install znapzend
+
+dnf5 -y -q install $(
+  curl -s https://api.github.com/repos/45Drives/cockpit-zfs-manager/releases/latest |
+  jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
+)
 
 # This is a RHEL variable, not present in Fedora
 # TODO::Look into automating this 
