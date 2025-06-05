@@ -172,6 +172,7 @@ jobs:
       - name: Keyless-sign image with cosign
         env:
           COSIGN_EXPERIMENTAL: "1"
-          IMAGE:  "${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.GITHUB_SHA }}"
         run: |
-          cosign sign --yes $IMAGE
+          IMAGE="${IMAGE_REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}"
+          echo "Signing image: $IMAGE"
+          cosign sign --yes "$IMAGE"
