@@ -23,7 +23,7 @@ dnf5 config-manager addrepo \
     --set=gpgkey=https://repo.45drives.com/key/gpg.asc
 
 # Install other 45drive cockpit modules
-dnf5 install -y -q --setopt=install_weak_deps=False cockpit-45drives-hardware cockpit-navigator cockpit-file-sharing
+dnf5 install -y -q --setopt=install_weak_deps=False cockpit-45drives-hardware cockpit-navigator cockpit-file-sharing 
 
 # Disable znapzend repo
 dnf5 -y copr disable spike/znapzend
