@@ -49,14 +49,15 @@ PKGS=(
    rclone
    ripgrep
    duperemove
-  "${COCKPIT[@]}"
-  "${SAMBA[@]}"
-  "${TERMINAL[@]}"
-  "${RECOVERY[@]}"
 )
 
+PKGS+=( "${COCKPIT[@]}" )
+PKGS+=( "${SAMBA[@]}" )
+PKGS+=( "${TERMINAL[@]}" )
+PKGS+=( "${RECOVERY[@]}" )
+
 # Enable Repos
-dnf5 -y -q copr enable atim/starship
+dnf5 -y -q copr enable atim/starship >/dev/null 2>&1
 dnf5 install -y -q $RPMFUSION_NONFREE # Needed for intel-media-driver
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1 # Needed for rpmfusion_*
 
@@ -66,7 +67,8 @@ bash /ctx/cockpit_45drives.sh
 # Install Packages
 dnf5  --refresh \
       --setopt=install_weak_deps=False \
-      install -y -q "${PKGS[@]}" \
+      install -y -q \
+      "${PKGS[@]}" \
       --exclude=nodejs-docs,nodejs-full-i18n
 
 # Enable Podman and Cockpit
