@@ -172,8 +172,8 @@ jobs:
       - name: Keyless-sign image with cosign
         env:
           COSIGN_EXPERIMENTAL: "1"
-          IMAGE:  "${{ steps.registry_case.outputs.lowercase }}/${{ steps.image_case.outputs.lowercase }}:${{ env.GITHUB_SHA }}"
         run: |
+          IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${{ steps.image_case.outputs.lowercase }}"
           DIGEST=$(skopeo inspect docker://$IMAGE --format '{{.Digest}}')
           echo "Signing image: $IMAGE@$DIGEST"
           cosign sign --yes "$IMAGE@$DIGEST"
