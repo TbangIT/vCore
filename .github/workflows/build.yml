@@ -175,5 +175,11 @@ jobs:
         run: |
           IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${{ steps.image_case.outputs.lowercase }}"
           DIGEST=$(skopeo inspect docker://$IMAGE_FULL --format '{{.Digest}}')
-          echo "Signing image: $IMAGE@$DIGEST"
-          cosign sign --yes "$IMAGE@$DIGEST"
+
+          if [ -z "$DIGEST" ]; then
+            echo "ERROR: Failed to get image digest for $IMAGE_FULL"
+            exit 1
+          fi
+
+          echo "Signing image: $IMAGE_FULL@$DIGEST"
+          cosign sign --yes "$IMAGE_FULL@$DIGEST"
