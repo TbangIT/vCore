@@ -171,7 +171,8 @@ jobs:
 
       - name: Keyless-sign image with cosign
         env:
-          COSIGN_EXPERIMENTAL: "1"
+          COSIGN_EXPERIMENTAL: false
+          SIGN_KEY: ${{ secrets.PRIV_KEY }}
         run: |
           IMAGE_FULL="${{ steps.registry_case.outputs.lowercase }}/${{ steps.image_case.outputs.lowercase }}"
           DIGEST=$(skopeo inspect docker://$IMAGE_FULL --format '{{.Digest}}')
@@ -181,7 +182,5 @@ jobs:
             exit 1
           fi
 
-          echo ${{ secrets.PRIV_KEY }} > /tmp/keyfile
-
           echo "Signing image: $IMAGE_FULL@$DIGEST"
-          cosign sign -y --key /tmp/keyfile "$IMAGE_FULL@$DIGEST"
+          cosign sign -y --key env://SIGN_KEY "$IMAGE_FULL@$DIGEST"
