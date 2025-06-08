@@ -182,4 +182,4 @@ jobs:
           fi
 
           echo "Signing image: $IMAGE_FULL@$DIGEST"
-          cosign sign --yes "$IMAGE_FULL@$DIGEST"
+          cosign sign -y --key env://PRIV_KEY "$IMAGE_FULL@$DIGEST"
