@@ -181,5 +181,7 @@ jobs:
             exit 1
           fi
 
+          echo ${{ secrets.PRIV_KEY }} > /tmp/keyfile
+
           echo "Signing image: $IMAGE_FULL@$DIGEST"
-          cosign sign -y --key ${{ secrets.PRIV_KEY }} "$IMAGE_FULL@$DIGEST"
+          cosign sign -y --key /tmp/keyfile "$IMAGE_FULL@$DIGEST"
