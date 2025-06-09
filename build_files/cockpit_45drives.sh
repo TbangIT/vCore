@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 dnf5 -y -q copr enable spike/znapzend >/dev/null 2>&1
 dnf5 -y -q --setopt=install_weak_deps=False install znapzend
 
@@ -23,7 +22,7 @@ dnf5 config-manager addrepo \
     --set=gpgkey=https://repo.45drives.com/key/gpg.asc
 
 # Install other 45drive cockpit modules
-dnf5 install -y -q --setopt=install_weak_deps=False cockpit-45drives-hardware cockpit-navigator cockpit-file-sharing 
+dnf5 install --refresh -y -q --setopt=install_weak_deps=False cockpit-45drives-hardware cockpit-navigator cockpit-file-sharing 
 
 # Disable znapzend repo
 dnf5 -y copr disable spike/znapzend
