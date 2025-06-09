@@ -13,7 +13,6 @@ COCKPIT=(
    cockpit-storaged
    cockpit-system
    cockpit-ostree
-   cockpit-image-builder
    # Fonts for Cockpit
    adwaita-mono-fonts       
    adwaita-sans-fonts
@@ -28,6 +27,7 @@ SAMBA=(
 
 TERMINAL=(
    zsh
+   nix
    fastfetch
    starship
    tmux
@@ -62,6 +62,9 @@ dnf5 -y -q copr enable atim/starship >/dev/null 2>&1
 dnf5 install -y -q $RPMFUSION_NONFREE # Needed for intel-media-driver
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1 # Needed for rpmfusion_*
 
+# Enable Nix
+sudo dnf copr enable petersen/nix
+
 # Install 45Drive Cockpit Packages 
 bash /ctx/cockpit_45drives.sh
 
@@ -75,10 +78,12 @@ dnf5  --refresh \
 # Enable Podman and Cockpit
 systemctl enable podman.socket
 systemctl enable cockpit.socket
+systemctl enable nix-daemon
 
-#Cleanup
+# Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
 dnf5 copr disable atim/starship
+sudo dnf copr disable petersen/nix
 dnf5 copr disable ublue-os/packages
 dnf5 config-manager setopt rpmfusion-nonfree.enabled=0
 dnf5 config-manager setopt rpmfusion-nonfree-updates.enabled=0
