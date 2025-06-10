@@ -63,7 +63,7 @@ dnf5 install -y -q $RPMFUSION_NONFREE # Needed for intel-media-driver
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1 # Needed for rpmfusion_*
 
 # Enable Nix
-sudo dnf copr enable petersen/nix
+sudo dnf -y -q copr enable petersen/nix > /dev/null 2>&1
 
 # Install 45Drive Cockpit Packages 
 bash /ctx/cockpit_45drives.sh
