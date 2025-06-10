@@ -14,7 +14,6 @@ COCKPIT=(
    cockpit-storaged
    cockpit-system
    cockpit-ostree
-   cockpit-file-sharing
    # Fonts for Cockpit
    adwaita-mono-fonts       
    adwaita-sans-fonts

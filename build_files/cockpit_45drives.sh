@@ -7,11 +7,13 @@ OWNER="45Drives"
 PKGS=(
   zfs-manager
   identities
+  file-sharing
 )
 
 # Install packages
 for i in "${PKGS[@]}"
 do 
+  echo "Installing 45Drives packages: cockpit-$i"
   dnf5 -y -q install $(
     curl -s https://api.github.com/repos/$OWNER/cockpit-$i/releases/latest |
     jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
