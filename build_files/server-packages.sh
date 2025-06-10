@@ -14,6 +14,7 @@ COCKPIT=(
    cockpit-storaged
    cockpit-system
    cockpit-ostree
+   cockpit-packagekit
    # Fonts for Cockpit
    adwaita-mono-fonts       
    adwaita-sans-fonts
@@ -35,10 +36,6 @@ TERMINAL=(
    neovim
    inotify-tools
    tree-sitter-cli
-)
-
-RECOVERY=(
-   ddrescue
 )
 
 PKGS=(
