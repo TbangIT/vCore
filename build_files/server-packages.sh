@@ -28,7 +28,7 @@ SAMBA=(
 )
 
 TERMINAL=(
-   zsh
+   fish
    nix
    fastfetch
    starship
