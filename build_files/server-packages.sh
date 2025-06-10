@@ -7,12 +7,14 @@ set ${SET_X:+-x} -eou pipefail
 
 COCKPIT=(
    cockpit
+   cockpit-files
    cockpit-networkmanager
    cockpit-podman
    cockpit-selinux
    cockpit-storaged
    cockpit-system
    cockpit-ostree
+   cockpit-file-sharing
    # Fonts for Cockpit
    adwaita-mono-fonts       
    adwaita-sans-fonts
@@ -53,7 +55,6 @@ PKGS=(
 )
 
 PKGS+=( "${COCKPIT[@]}" )
-PKGS+=( "${SAMBA[@]}" )
 PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
 
@@ -67,6 +68,11 @@ sudo dnf -y -q copr enable petersen/nix > /dev/null 2>&1
 
 # Install 45Drive Cockpit Packages 
 bash /ctx/cockpit_45drives.sh
+
+# Install Samba
+dnf5  --refresh \
+      install -y -q \
+      "${SAMBA[@]}" \
 
 # Install Packages
 dnf5  --refresh \

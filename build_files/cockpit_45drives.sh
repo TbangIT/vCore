@@ -7,7 +7,6 @@ OWNER="45Drives"
 PKGS=(
   zfs-manager
   identities
-  file-sharing
 )
 
 # Install packages
