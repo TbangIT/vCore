@@ -3,29 +3,21 @@
 dnf5 -y -q copr enable spike/znapzend >/dev/null 2>&1
 dnf5 -y -q --setopt=install_weak_deps=False install znapzend
 
-dnf5 -y -q install $(
-  curl -s https://api.github.com/repos/45Drives/cockpit-zfs-manager/releases/latest |
-  jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
+OWNER="45Drives"
+PKGS=(
+  zfs-manager
+  identities
+  file-sharing
 )
 
-# This is a RHEL variable, not present in Fedora
-# TODO::Look into automating this 
-RELEASEVER=9
-
-# Install the 45drives repo
-dnf5 config-manager addrepo \
-    --set=baseurl=https://repo.45drives.com/enterprise/rocky/el$RELEAEVER/stable \
-    --id=45drives_enterprise \
-    --set=name="45Drives Enterprise $RELEASEVER Repo" \
-    --set=enabled=1 \
-    --set=gpgcheck=1 \
-    --set=gpgkey=https://repo.45drives.com/key/gpg.asc
-
-# Install other 45drive cockpit modules
-dnf5 install --refresh -y -q --setopt=install_weak_deps=False cockpit-45drives-hardware cockpit-navigator cockpit-file-sharing 
+# Install packages
+for i in "${PKGS[@]}"
+do 
+  dnf5 -y -q install $(
+    curl -s https://api.github.com/repos/$OWNER/cockpit-$i/releases/latest |
+    jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
+  )
+done
 
 # Disable znapzend repo
 dnf5 -y copr disable spike/znapzend
-
-# Disable 45drives repo
-dnf5 config-manager setopt 45drives_enterprise.enabled=0 
