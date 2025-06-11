@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-dnf5 -y -q copr enable spike/znapzend >/dev/null 2>&1
-dnf5 -y -q --setopt=install_weak_deps=False install znapzend
-
 OWNER="45Drives"
 PKGS=(
   identities
@@ -37,6 +34,3 @@ do
     jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
   )
 done
-
-# Disable znapzend repo
-dnf5 -y copr disable spike/znapzend
