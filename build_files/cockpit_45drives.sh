@@ -28,9 +28,38 @@ rm -rf /tmp/cockpit-zfs-manager*
 # Install packages
 for i in "${PKGS[@]}"
 do 
-  echo "Installing 45Drives packages: cockpit-$i"
-  dnf5 -y -q install $(
-    curl -s https://api.github.com/repos/$OWNER/cockpit-$i/releases/latest |
+  echo "Installing 45Drives package: cockpit-$i"
+
+  # Read URLs into array
+  mapfile -t CANDIDATE < <(
+    curl --fail --retry 15 --retry-all-errors -s "https://api.github.com/repos/$OWNER/cockpit-$i/releases/latest" |
     jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
   )
+
+  EL_MAX=0
+  SELECTED=""
+
+  if (( ${#CANDIDATE[@]} > 1 )); then
+    for url in "${CANDIDATE[@]}"; do
+      # Extract .el version number (RHEL-style RPM naming)
+      if [[ "$url" =~ \.el([0-9]+)\. ]]; then
+        EL_VERSION="${BASH_REMATCH[1]}"
+        if (( EL_VERSION > EL_MAX )); then
+          EL_MAX=$EL_VERSION
+          SELECTED="$url"
+        fi
+      fi
+    done
+
+    if [[ -n "$SELECTED" ]]; then
+      dnf5 -y -q install --setopt=install_weak_deps=False "$SELECTED"
+    else
+      echo "No valid el* version found in candidates for cockpit-$i"
+    fi
+
+  elif (( ${#CANDIDATE[@]} == 1 )); then
+    dnf5 -y -q install --setopt=install_weak_deps=False "${CANDIDATE[0]}"
+  else
+    echo "No RPM found for cockpit-$i"
+  fi
 done
