@@ -39,6 +39,7 @@ TERMINAL=(
 )
 
 PKGS=(
+   man-db
    libatomic
    firewalld
    ipset
