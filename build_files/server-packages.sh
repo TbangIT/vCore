@@ -32,7 +32,7 @@ TERMINAL=(
    nix
    fastfetch
    starship
-   tmux
+   zellij
    neovim
    inotify-tools
    tree-sitter-cli
@@ -56,7 +56,8 @@ PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
 
 # Enable Repos
-dnf5 -y -q copr enable atim/starship >/dev/null 2>&1
+dnf5 -y -q copr enable atim/starship >/dev/null 2>&1 
+dnf5 -y -q copr enable varlad/zellij >/dev/null 2>&1
 dnf5 install -y -q $RPMFUSION_NONFREE # Needed for intel-media-driver
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1 # Needed for rpmfusion_*
 
@@ -86,6 +87,7 @@ systemctl enable nix-daemon
 # Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
 dnf5 copr disable atim/starship
+dnf5 copr disable varlad/zellij
 sudo dnf copr disable petersen/nix
 dnf5 copr disable ublue-os/packages
 dnf5 config-manager setopt rpmfusion-nonfree.enabled=0
