@@ -41,6 +41,7 @@ TERMINAL=(
 PKGS=(
    man-db
    libatomic
+   podlet
    firewalld
    ipset
    intel-compute-runtime
