@@ -30,6 +30,7 @@ SAMBA=(
 TERMINAL=(
    fish
    nix
+   yt-dlp
    fastfetch
    starship
    zellij
