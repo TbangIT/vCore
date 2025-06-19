@@ -39,6 +39,8 @@ TERMINAL=(
 )
 
 PKGS=(
+   systemd-boot-unsigned
+   man-pages
    man-db
    libatomic
    podlet
