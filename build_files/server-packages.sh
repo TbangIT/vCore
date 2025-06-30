@@ -93,6 +93,7 @@ dnf5  --refresh \
 systemctl enable podman.socket
 systemctl enable cockpit.socket
 systemctl enable nix-daemon
+systemctl enable sd-bootc.service
 
 # Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
