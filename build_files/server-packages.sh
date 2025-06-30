@@ -55,6 +55,12 @@ PKGS=(
    duperemove
 )
 
+# Install sd-bootc, a small script to help with systemd-boot
+dnf5 -y -q install $(
+ curl -s https://api.github.com/repos/ta-vroom/sd-bootc/releases/latest |
+ jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
+)
+
 PKGS+=( "${COCKPIT[@]}" )
 PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
