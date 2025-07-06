@@ -30,6 +30,7 @@ SAMBA=(
 TERMINAL=(
    fish
    nix
+   yt-dlp
    fastfetch
    starship
    zellij
@@ -39,6 +40,8 @@ TERMINAL=(
 )
 
 PKGS=(
+   systemd-boot-unsigned
+   man-pages
    man-db
    libatomic
    podlet
@@ -50,6 +53,12 @@ PKGS=(
    rclone
    ripgrep
    duperemove
+)
+
+# Install sd-bootc, a small script to help with systemd-boot
+dnf5 -y -q install $(
+ curl -s https://api.github.com/repos/ta-vroom/sd-bootc/releases/latest |
+ jq -r '.assets[] | select(.name | endswith(".rpm")) | .browser_download_url'
 )
 
 PKGS+=( "${COCKPIT[@]}" )
@@ -84,6 +93,7 @@ dnf5  --refresh \
 systemctl enable podman.socket
 systemctl enable cockpit.socket
 systemctl enable nix-daemon
+systemctl enable sd-bootc.service
 
 # Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
