@@ -46,7 +46,7 @@ PKGS=(
    ipset
    intel-compute-runtime
    intel-media-driver
-   podman-compose
+   zig   
    rclone
    ripgrep
    duperemove
