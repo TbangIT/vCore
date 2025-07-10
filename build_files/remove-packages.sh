@@ -5,7 +5,10 @@ set ${SET_X:+-x} -eou pipefail
 # Delete Podman Cockpit
 rm -rf /usr/lib/systemd/system/cockpit.service
 
+
+
 RM=(
+    tailscale
     NetworkManager-cloud-setup
     amd-gpu-firmware
     nvidia-gpu-firmware
@@ -17,4 +20,6 @@ RM=(
     docker-cli
 )
 
-dnf5 install -y -q "${RM[@]}"
+dnf5 remove -y -q "${RM[@]}"
+
+rm -rf /etc/yum.repos.d/tailscale.repo
