@@ -38,10 +38,13 @@ TERMINAL=(
    tree-sitter-cli
 )
 
-PKGS=(
-   systemd-boot-unsigned
+MAN=(
+   man
    man-pages
    man-db
+)
+
+PKGS=(
    libatomic
    podlet
    firewalld
@@ -55,26 +58,27 @@ PKGS=(
 )
 
 # yt-dlp 
+# Installing it from dnf would sometimes fail
 dnf5 -y -q install $(
  curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest |
  jq -r '.assets[] | select(.name == "yt-dlp") | .browser_download_url'
 )
 
+PKGS+=( "${MAN[@]}" )
 PKGS+=( "${COCKPIT[@]}" )
 PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
+
+# Install Podling
+git clone https://github.com/ta-vroom/podling /tmp/podling
+mv /tmp/podling/podling /usr/bin
+chmod +x /usr/bin/podling
 
 # Enable Repos
 dnf5 -y -q copr enable atim/starship >/dev/null 2>&1 
 dnf5 -y -q copr enable varlad/zellij >/dev/null 2>&1
 dnf5 install -y -q $RPMFUSION_NONFREE # Needed for intel-media-driver
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=1 # Needed for rpmfusion_*
-
-# Enable Nix
-sudo dnf -y -q copr enable petersen/nix > /dev/null 2>&1
-
-# Install 45Drive Cockpit Packages 
-bash /ctx/cockpit_45drives.sh
 
 # Install Samba
 dnf5  --refresh \
@@ -91,14 +95,12 @@ dnf5  --refresh \
 # Enable Podman and Cockpit
 systemctl enable podman.socket
 systemctl enable cockpit.socket
-systemctl enable nix-daemon
 systemctl enable sd-bootc.service
 
 # Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
 dnf5 copr disable atim/starship
 dnf5 copr disable varlad/zellij
-sudo dnf copr disable petersen/nix
 dnf5 copr disable ublue-os/packages
 dnf5 config-manager setopt rpmfusion-nonfree.enabled=0
 dnf5 config-manager setopt rpmfusion-nonfree-updates.enabled=0

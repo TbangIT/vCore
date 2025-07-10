@@ -1,0 +1,3 @@
+docker:
+  ghcr.io/ta-vroom:
+    use-sigstore-attachments: true

@@ -1,6 +1,6 @@
 ARG REPO_SOURCE="ghcr.io"
 ARG REPO_OWNER="ublue-os"
-ARG BASE_IMAGE="fedora-coreos"
+ARG BASE_IMAGE="ucore-minimal"
 ARG TAG_VERSION="stable-zfs"
 
 # Allow build scripts to be referenced without being copied into the final image
@@ -9,6 +9,14 @@ COPY build_files /
 
 # Base Image
 FROM ${REPO_SOURCE}/${REPO_OWNER}/${BASE_IMAGE}:${TAG_VERSION}
+
+
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/remove_packages.sh && \
+    ostree container commit
 
 
 ## Other possible base images include:
