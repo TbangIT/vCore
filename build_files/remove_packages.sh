@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ouex pipefail
+set ${SET_X:+-x} -eou pipefail
 
 # Delete Podman Cockpit
 rm -rf /usr/lib/systemd/system/cockpit.service
