@@ -59,7 +59,7 @@ PKGS=(
 
 # yt-dlp 
 # Installing it from dnf would sometimes fail
-dnf5 -y -q install $(
+curl -o /usr/bin/yt-dlp $(
  curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest |
  jq -r '.assets[] | select(.name == "yt-dlp") | .browser_download_url'
 )
