@@ -29,7 +29,6 @@ SAMBA=(
 
 TERMINAL=(
    fish
-   nix
    fastfetch
    starship
    zellij
