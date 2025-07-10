@@ -43,6 +43,14 @@ MAN=(
    man-db
 )
 
+MEDIA=(
+   yt-dlp
+   ffmpeg
+   ffprobe
+   curl_cffi
+   AtomicParsley
+)
+
 PKGS=(
    libatomic
    podlet
@@ -56,14 +64,10 @@ PKGS=(
    duperemove
 )
 
-# yt-dlp 
-# Installing it from dnf would sometimes fail
-curl -o /usr/bin/yt-dlp $(
- curl -s https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest |
- jq -r '.assets[] | select(.name == "yt-dlp") | .browser_download_url'
-)
+
 
 PKGS+=( "${MAN[@]}" )
+PKGS+=( "${MEDIA[@]}" )
 PKGS+=( "${COCKPIT[@]}" )
 PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
