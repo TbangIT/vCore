@@ -47,7 +47,7 @@ MEDIA=(
    yt-dlp
    ffmpeg
    ffprobe
-   curl_cffi
+   #curl_cffi
    AtomicParsley
 )
 
