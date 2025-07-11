@@ -76,7 +76,9 @@ mv /tmp/podling/podling /usr/bin
 chmod +x /usr/bin/podling
 
 # Install signing related files
-rsync -av /ctx/signing /
+cp /ctx/signing/etc/containers/registries.d/ta-vroom.yaml /etc/containers/registries.d
+cp /ctx/signing/etc/containers/policy.json /etc/containers
+
 curl -L -o /etc/pki/containers/ta-vroom.pub $(
   curl -s https://api.github.com/repos/ta-vroom/vcore/releases/latest |
   jq -r '.assets[] | select(.name | endswith(".pub")) | .browser_download_url'
