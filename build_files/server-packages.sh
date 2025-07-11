@@ -51,6 +51,11 @@ MEDIA=(
    AtomicParsley
 )
 
+GREENBOOT=(
+   greenboot
+   greenboot-default-health-checks
+)
+
 PKGS=(
    libatomic
    podlet
@@ -66,6 +71,7 @@ PKGS=(
 
 PKGS+=( "${MAN[@]}" )
 PKGS+=( "${MEDIA[@]}" )
+PKGS+=( "${GREENBOOT[@]}" )
 PKGS+=( "${COCKPIT[@]}" )
 PKGS+=( "${TERMINAL[@]}" )
 PKGS+=( "${RECOVERY[@]}" )
@@ -103,11 +109,15 @@ dnf5  --refresh \
       --exclude=nodejs-docs,nodejs-full-i18n
 
 # Install 45_drives
+# bash is required to execute scripts
 bash /ctx/cockpit_45drives.sh
 
 # Enable Podman and Cockpit
 systemctl enable podman.socket
 systemctl enable cockpit.socket
+
+# Enable Greenboot
+systemctl enable greenboot-task-runner greenboot-healthcheck greenboot-status greenboot-loading-message greenboot-grub2-set-counter greenboot-grub2-set-success greenboot-rpm-ostree-grub2-check-fallback redboot-auto-reboot redboot-task-runner
 
 # Cleanup
 dnf5 config-manager setopt fedora-cisco-openh264.enabled=0
