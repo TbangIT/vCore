@@ -1,13 +1,10 @@
 #!/bin/bash
-
-set ${SET_X:+-x} -eou pipefail
+source /ctx/common
 
 # Delete Podman Cockpit
 rm -rf /usr/lib/systemd/system/cockpit.service
 
-
-
-RM=(
+PKGS=(
     tailscale
     NetworkManager-cloud-setup
     amd-gpu-firmware
@@ -20,6 +17,6 @@ RM=(
     docker-cli
 )
 
-dnf5 remove -y -q "${RM[@]}"
+dnf5 remove -y -q "${PKGS[@]}"
 
 rm -rf /etc/yum.repos.d/tailscale.repo
