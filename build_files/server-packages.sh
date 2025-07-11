@@ -64,8 +64,6 @@ PKGS=(
    duperemove
 )
 
-
-
 PKGS+=( "${MAN[@]}" )
 PKGS+=( "${MEDIA[@]}" )
 PKGS+=( "${COCKPIT[@]}" )
@@ -94,6 +92,9 @@ dnf5  --refresh \
       install -y -q \
       "${PKGS[@]}" \
       --exclude=nodejs-docs,nodejs-full-i18n
+
+# Install 45_drives
+/ctx/cockpit_45drives.sh
 
 # Enable Podman and Cockpit
 systemctl enable podman.socket
