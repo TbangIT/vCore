@@ -15,7 +15,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/remove-packages.sh && \
+    bash /ctx/remove-packages.sh && \
     ostree container commit
 
 # Configure tweaks
@@ -23,7 +23,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/tweaks.sh && \
+    bash /ctx/tweaks.sh && \
     ostree container commit
 
 # Install and enable greenboot
@@ -31,7 +31,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/greenboot.sh && \
+    bash /ctx/greenboot.sh && \
     ostree container commit
 
 # Install man
@@ -39,7 +39,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/man.sh && \
+    bash /ctx/man.sh && \
     ostree container commit
 
 
@@ -48,7 +48,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/cockpit.sh && \
+    bash /ctx/cockpit.sh && \
     ostree container commit
 
 # Install Samba
@@ -56,7 +56,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/samba.sh && \
+    bash /ctx/samba.sh && \
     ostree container commit
 
 # Install Terminal Programs
@@ -64,7 +64,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/terminal.sh && \
+    bash /ctx/terminal.sh && \
     ostree container commit
 
 # Install Packages in the RPMFusion repos
@@ -72,5 +72,5 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/fusion-packages.sh && \
+    bash /ctx/fusion-packages.sh && \
     ostree container commit

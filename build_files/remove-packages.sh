@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 source /ctx/common
 
 # Delete Podman Cockpit
