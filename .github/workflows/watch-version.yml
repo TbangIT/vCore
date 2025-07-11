@@ -1,0 +1,43 @@
+name: watch-base
+on:
+  #schedule:                     # run every 30 min
+  #  - cron:  '*/30 * * * *'
+  workflow_dispatch:            # you can also fire it manually
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - name: remote
+        id: remote
+        run: |
+          UCORE=$(
+            skopeo inspect docker://ghcr.io/ublue-os/ucore-minimal:stable-zfs --format \
+              '{{ index .Labels "org.opencontainers.image.version"}}')
+          echo "ucore_version=$UCORE" >> "$GITHUB_OUTPUT"
+      - id: local
+        run: |
+         VCORE=$(
+            skopeo inspect docker://ghcr.io/ta-vroom/vcore:latest --format \
+              '{{ index .Labels "org.opencontainers.image.version"}}')
+          echo vcore=$VCORE >> "$GITHUB_OUTPUT"
+      - id: diff
+        run: |
+          if [ "${{ steps.remote.outputs.ucore }}" != \
+               "${{ steps.local.outputs.vcore }}" ]; then
+            echo "update=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "update=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  trigger-build:
+    needs: check
+    if: needs.check.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kick off the build workflow
+        run: gh workflow run build.yml -F base_digest=${{ needs.check.outputs.digest }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
