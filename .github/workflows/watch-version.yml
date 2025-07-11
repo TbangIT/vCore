@@ -1,4 +1,4 @@
-name: watch-base
+name: 💂 Update Guard
 on:
   #schedule:                     # run every 30 min
   #  - cron:  '*/30 * * * *'
