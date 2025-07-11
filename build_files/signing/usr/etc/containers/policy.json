@@ -20,7 +20,27 @@
                     "keyPath": "/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release"
                 }
             ],
-            "ghcr.io/ta-vroom": [
+            "quay.io/toolbx-images": [
+                {
+                    "type": "sigstoreSigned",
+                    "keyPath": "/etc/pki/containers/quay.io-toolbx-images.pub",
+                    "signedIdentity": {
+                        "type": "matchRepository"
+                    }
+                }
+            ],
+            "ghcr.io/ublue-os": [
+                {
+                    "type": "sigstoreSigned",
+                    "keyPaths": [
+                        "/etc/pki/containers/ublue-os.pub",
+                        "/etc/pki/containers/ublue-os-backup.pub"
+                    ],
+                    "signedIdentity": {
+                        "type": "matchRepository"
+                    }
+                }
+            ],  "ghcr.io/ta-vroom": [
                 {
                     "type": "sigstoreSigned",
                     "keyPaths": [
@@ -95,3 +115,4 @@
         }
     }
 }
+
