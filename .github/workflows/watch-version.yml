@@ -6,27 +6,30 @@ on:
 
 jobs:
   check:
+    name: "Check image versions"
     runs-on: ubuntu-latest
     outputs:
-      changed: ${{ steps.diff.outputs.changed }}
+      diff: ${{ steps.compare.outputs.diff }}
     steps:
-      - name: remote
-        id: remote
+      - name: uCore Version
+        id: ucore
         run: |
           UCORE=$(
             skopeo inspect docker://ghcr.io/ublue-os/ucore-minimal:stable-zfs --format \
               '{{ index .Labels "org.opencontainers.image.version"}}')
           echo "ucore_version=$UCORE" >> "$GITHUB_OUTPUT"
-      - id: local
+      - name: vCore Version
+        id: vcore
         run: |
          VCORE=$(
             skopeo inspect docker://ghcr.io/ta-vroom/vcore:latest --format \
               '{{ index .Labels "org.opencontainers.image.version"}}')
           echo vcore=$VCORE >> "$GITHUB_OUTPUT"
-      - id: diff
+      - name: Compare
+        id: compare
         run: |
-          if [ "${{ steps.remote.outputs.ucore }}" != \
-               "${{ steps.local.outputs.vcore }}" ]; then
+          if [ "${{ steps.ucore.outputs.ucore }}" != \
+               "${{ steps.vcore.outputs.vcore }}" ]; then
             echo "update=true" >> "$GITHUB_OUTPUT"
           else
             echo "update=false" >> "$GITHUB_OUTPUT"
@@ -34,10 +37,10 @@ jobs:
 
   trigger-build:
     needs: check
-    if: needs.check.outputs.changed == 'true'
+    if: needs.check.outputs.diff == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Kick off the build workflow
-        run: gh workflow run build.yml -F base_digest=${{ needs.check.outputs.digest }}
+        run: gh workflow run build.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
