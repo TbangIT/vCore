@@ -1,5 +1,5 @@
 ---
-name: Build ISOs
+name: 💿 Build ISOs
 
 on:
   workflow_dispatch:
