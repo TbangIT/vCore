@@ -74,3 +74,11 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     bash /ctx/fusion-packages.sh && \
     ostree container commit
+
+# Install media-based packages
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    bash /ctx/media.sh && \
+    ostree container commit
