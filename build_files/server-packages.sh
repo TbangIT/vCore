@@ -101,6 +101,7 @@ dnf5  --refresh \
       --exclude=nodejs-docs,nodejs-full-i18n
 
 # Install 45_drives
+chmod +x /ctx/cockpit_45drives.sh
 /ctx/cockpit_45drives.sh
 
 # Enable Podman and Cockpit
