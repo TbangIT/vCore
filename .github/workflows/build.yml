@@ -55,7 +55,7 @@ jobs:
       - name: Get version
         id: ucoreLabels
         run: |
-          skopeo inspect docker://ghcr.io/ublue-os/ucore-minimal:stable-zfs | jq -r '.Labels' >> $GITHUB_OUTPUT
+          skopeo inspect docker://ghcr.io/ublue-os/ucore-minimal:stable-zfs | jq -r '.Labels["org.opencontainers.image.version"]' >> $GITHUB_OUTPUT
 
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
@@ -80,7 +80,7 @@ jobs:
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
             org.opencontainers.image.vendor=${{ github.repository_owner }}
-            org.opencontainers.image.version=${{ steps.ucoreLabels.outputs.org.opencontainers.image.version }}
+            org.opencontainers.image.version=${{ steps.ucoreLabels.outputs.ucoreLabels }}
             io.artifacthub.package.deprecated=false
             io.artifacthub.package.keywords=bootc,ublue,universal-blue
             io.artifacthub.package.license=Apache-2.0
