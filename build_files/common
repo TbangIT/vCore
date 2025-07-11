@@ -1,0 +1,11 @@
+#!/bin/bash
+set -ouex pipefail
+
+DNF(){
+    local PKGS=("$@")
+    dnf5  --refresh \
+        --setopt=install_weak_deps=False \
+        install -y -q \
+        "${PKGS[@]}" \
+        --exclude=nodejs-docs,nodejs-full-i18n
+}
