@@ -1,24 +1,11 @@
 #!/usr/bin/env bash
 source /ctx/common
 
-MEDIA=(
-   yt-dlp
-   ffmpeg
-   ffprobe
-   #curl_cffi
-   AtomicParsley
-)
-
 PKGS=(
-   podlet
    ipset
    zig   
-   rclone
-   ripgrep
    duperemove
 )
-
-PKGS+=( "${MEDIA[@]}" )
 
 # Install Packages
 DNF "${PKGS[@]}"
