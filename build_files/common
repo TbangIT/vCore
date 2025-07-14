@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ouex pipefail
 
+BIN_DIR=/usr/bin
+
 DNF(){
     local PKGS=("$@")
     dnf5  --refresh \
