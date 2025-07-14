@@ -29,4 +29,4 @@ dnf5 -y -q copr disable petersen/nix >/dev/null 2>&1
 rm -rf /nix
 
 # Create the /nix symlink on the base image
-ln -s /var/nix /nix
+ln -s var/nix /nix
