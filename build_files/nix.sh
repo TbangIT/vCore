@@ -12,7 +12,7 @@ EOF
 dnf5 -y -q copr enable petersen/nix >/dev/null 2>&1 
 
 # Install Nix
-dnf5 install -y -q nix
+DNF nix
 
 # Enable the Nix Daemon (to enable Nix for all users)
 systemctl enable nix-daemon.service
