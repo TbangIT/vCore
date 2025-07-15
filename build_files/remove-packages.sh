@@ -15,6 +15,8 @@ PKGS=(
     cloud-utils-growpart
     moby-engine
     docker-cli
+    open-vm-tools
+    qemu-guest-agent
 )
 
 dnf5 remove -y -q "${PKGS[@]}"
