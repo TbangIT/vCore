@@ -10,9 +10,9 @@ RUST=(
     fd-find # find
     bat # cat
     zoxide # cd
-    dust # du search what takes space
+    #dust # du search what takes space
     duf # df see storage available
-    zellij # tmux
+    zellij # tmux alternative
 )
 
 PKGS=(
