@@ -6,6 +6,7 @@ rm -rf /usr/lib/systemd/system/cockpit.service
 
 PKGS=(
     tailscale
+    tmux
     NetworkManager-cloud-setup
     amd-gpu-firmware
     nvidia-gpu-firmware
