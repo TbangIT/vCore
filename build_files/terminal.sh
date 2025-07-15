@@ -15,9 +15,6 @@ RUST=(
     zellij # tmux
 )
 
-
-PKGS+=( "${RUST[@]}" )
-
 PKGS=(
    fish # Shell
    fastfetch # Neofetch alt.
@@ -27,6 +24,8 @@ PKGS=(
    inotify-tools
    tree-sitter-cli
 )
+
+PKGS+=( "${RUST[@]}" )
 
 DNF "${PKGS[@]}"
 
