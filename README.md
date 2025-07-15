@@ -2,10 +2,12 @@
 This template supports Nix out-of-the-box, enabling declarative package management alongside traditional RPMs and containerized services.
 
 ## 💡 When to Use What
-Method	Example Use Cases	Benefits
-Base Image RPMs	Kernel updates, GPU drivers, systemd, security tools	Stability, system integration, trusted updates
-Nix Packages	ffmpeg, ripgrep, dev environments (rustc, go)	Reproducibility, isolation, rollback
-Podman Containers	Web services, databases, media servers (e.g., Vaultwarden)	Sandboxing, portability, runtime consistency
+
+| **Method**           | **Example**                                     | **Use Cases**                                | **Benefits**                                |
+|----------------------|--------------------------------------------------|-----------------------------------------------|----------------------------------------------|
+| **Base Image RPMs**  | Kernel updates, GPU drivers, systemd, security tools | System-level components that need tight integration | Stability, system integration, trusted updates |
+| **Nix Packages**     | `ffmpeg`, `ripgrep`, dev environments (`rustc`, `go`) | Developer tools, CLI utilities, ad-hoc installs | Reproducibility, isolation, rollback         |
+| **Podman Containers**| Web services, databases, media servers (e.g., Vaultwarden) | Services with persistent runtime environments   | Sandboxing, portability, runtime consistency |
 
 ## ❓ Why Not Just Use NixOS or Containers?
 TODO: Add a rationale explaining the hybrid appeal of bootc-based systems (e.g., combining atomic host upgrades with Nix and container flexibility without needing a full NixOS setup).
