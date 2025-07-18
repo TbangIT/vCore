@@ -24,9 +24,3 @@ systemctl enable nix-daemon.service
 
 # Disable the Nix Repo
 dnf5 -y -q copr disable petersen/nix >/dev/null 2>&1 
-
-# Remove the /root nix directory
-rm -rf /nix
-
-# Create the /nix symlink on the base image
-ln -s var/nix /nix
