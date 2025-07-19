@@ -10,7 +10,7 @@ EOF
 
 # Create a bind mount for Nix
 # Nix doesn't seem to appreciate having a symlink
-cat <<EOF > /usr/etc/systemd/system/nix.mount
+cat <<EOF > /usr/lib/systemd/system/nix.mount
 [Unit]
 Description=Bind mount /var/nix to /nix
 Before=local-fs.target
