@@ -43,10 +43,5 @@ DNF nix
 systemctl enable nix.mount
 systemctl enable nix-daemon.service
 
-# Enable Nix MOTD
-# cat <<EOF > /etc/motd.d/nix
-# Nix has been installed. To use, add current user to nix-users group
-# EOF
-
 # Disable the Nix Repo
 dnf5 -y -q copr disable petersen/nix >/dev/null 2>&1 
