@@ -27,7 +27,7 @@ EOF
 
 # Create nix-daemon overrides
 mkdir -p /usr/lib/systemd/system/nix-daemon.service.d
-cat <<EOF > /usr/lib/systemd/system/nix-daemon.service.d
+cat <<EOF > /usr/lib/systemd/system/nix-daemon.service.d/override.conf
 [Unit]
 After=nix.mount
 Requires=nix.mount
