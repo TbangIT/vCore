@@ -15,6 +15,3 @@ ls -l /ctx/signing
 cp /ctx/signing/ta-vroom.yaml /etc/containers/registries.d/ta-vroom.yaml
 cp /ctx/signing/policy.json /etc/containers/policy.json
 cp /ctx/signing/cosign.pub /etc/pki/containers/ta-vroom.pub
-
-dnf5 -y -q remove NetworkManager
-dnf5 -y -q install systemd-networkd
