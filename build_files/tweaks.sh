@@ -11,10 +11,7 @@ chmod +x /usr/bin/podling
 dnf5 remove -y -q ublue-os-signing.noarch
 
 # Install signing related files
-cp /ctx/signing/etc/containers/registries.d/ta-vroom.yaml /etc/containers/registries.d
-cp /ctx/signing/etc/containers/policy.json /etc/containers
-
-curl -L -o /etc/pki/containers/ta-vroom.pub $(
-  curl -s https://api.github.com/repos/ta-vroom/vcore/releases/latest |
-  jq -r '.assets[] | select(.name | endswith(".pub")) | .browser_download_url'
-)
+ls -l /ctx/signing
+cp /ctx/signing/ta-vroom.yaml /etc/containers/registries.d/ta-vroom.yaml
+cp /ctx/signing/policy.json /etc/containers/policy.json
+cp /ctx/signing/cosign.pub /etc/pki/containers/ta-vroom.pub

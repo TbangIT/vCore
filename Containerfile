@@ -6,11 +6,12 @@ ARG TAG_VERSION="stable-zfs"
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
+COPY cosign.pub /signing
 
-# Base Image
+#0 Base Image
 FROM ${REPO_SOURCE}/${REPO_OWNER}/${BASE_IMAGE}:${TAG_VERSION}
 
-# Remove unneeded packages
+#1 Remove unneeded packages
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -18,7 +19,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/remove-packages.sh && \
     ostree container commit
 
-# Configure tweaks
+#2 Configure tweaks
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -26,7 +27,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/tweaks.sh && \
     ostree container commit
 
-# Install and enable greenboot
+#3 Install and enable greenboot
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -34,7 +35,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/greenboot.sh && \
     ostree container commit
 
-# Install man
+#4 Install man
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -42,8 +43,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/man.sh && \
     ostree container commit
 
-
-# Install Cockpit
+#5 Install Cockpit
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -51,7 +51,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/cockpit.sh && \
     ostree container commit
 
-# Install Samba
+#6 Install Samba
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -59,7 +59,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/samba.sh && \
     ostree container commit
 
-# Install Terminal Programs
+#7 Install Terminal Programs
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -67,7 +67,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/terminal.sh && \
     ostree container commit
 
-# Install Packages in the RPMFusion repos
+#8 Install Packages in the RPMFusion repos
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -75,7 +75,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/fusion-packages.sh && \
     ostree container commit
 
-# Install media-based packages
+#9 Install media-based packages
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -83,7 +83,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/media.sh && \
     ostree container commit
 
-# Install github-based packages
+#10 Install github-based packages
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -91,8 +91,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/github.sh && \
     ostree container commit
 
-
-# Install nix 
+#11 Install nix 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
@@ -100,7 +99,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/nix.sh && \
     ostree container commit
 
-# Cleanup
+#12 Cleanup
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \

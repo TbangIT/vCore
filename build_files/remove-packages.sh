@@ -6,6 +6,7 @@ rm -rf /usr/lib/systemd/system/cockpit.service
 
 PKGS=(
     tailscale
+    tmux
     NetworkManager-cloud-setup
     amd-gpu-firmware
     nvidia-gpu-firmware
@@ -15,6 +16,8 @@ PKGS=(
     cloud-utils-growpart
     moby-engine
     docker-cli
+    open-vm-tools
+    qemu-guest-agent
 )
 
 dnf5 remove -y -q "${PKGS[@]}"
