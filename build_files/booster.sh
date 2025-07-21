@@ -16,6 +16,7 @@ cat <<EOF > /etc/booster.yaml
 # https://man.archlinux.org/man/booster.1
 network:
   dhcp: on
+universal: true
 extra_files: fido2-assert,/usr/lib/ostree
 EOF
 
