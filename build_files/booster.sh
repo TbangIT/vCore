@@ -20,6 +20,6 @@ extra_files: fido2-assert,/usr/lib/ostree
 EOF
 
 KERNEL=$(ls /usr/lib/modules)
-/usr/bin/booster build --force "/boot/initramfs.img" \
+/usr/bin/booster build --force "/usr/lib/modules/$KERNEL/initramfs.img" \
   --kernel-version="$KERNEL" \
   --modules-dir="/usr/lib/modules/$KERNEL"
