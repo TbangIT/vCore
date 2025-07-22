@@ -23,6 +23,7 @@ PKGS=(
    neovim
    inotify-tools
    tree-sitter-cli
+   systemd-boot-unsigned
 )
 
 PKGS+=( "${RUST[@]}" )
