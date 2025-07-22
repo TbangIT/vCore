@@ -99,18 +99,10 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     bash /ctx/nix.sh && \
     ostree container commit
 
-#12 Install booster 
+#12 Cleanup
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    bash /ctx/booster.sh && \
-    ostree container commit
-
-#13 Cleanup
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    bash /ctx/cleanup.sh && \
+    bash /ctx/nix.sh && \
     ostree container commit
