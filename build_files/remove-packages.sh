@@ -18,8 +18,11 @@ PKGS=(
     docker-cli
     open-vm-tools
     qemu-guest-agent
+    networkmanager
 )
 
 dnf5 remove -y -q "${PKGS[@]}"
+
+DNF systemd-networkd
 
 rm -rf /etc/yum.repos.d/tailscale.repo
