@@ -17,11 +17,12 @@ cat <<EOF > /etc/booster.yaml
 network:
   dhcp: on
 universal: true
+append_all_modaliases: true
 extra_files: fido2-assert,/usr/lib/ostree
 EOF
 
 KERNEL=$(ls /usr/lib/modules)
 /usr/bin/booster build --force "/usr/lib/modules/$KERNEL/initramfs.img" \
   --kernel-version="$KERNEL" \
-  --append_all_modaliases \
+   \
   --modules-dir="/usr/lib/modules/$KERNEL"
