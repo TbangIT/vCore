@@ -23,4 +23,5 @@ EOF
 KERNEL=$(ls /usr/lib/modules)
 /usr/bin/booster build --force "/usr/lib/modules/$KERNEL/initramfs.img" \
   --kernel-version="$KERNEL" \
+  --append_all_modaliases \
   --modules-dir="/usr/lib/modules/$KERNEL"
