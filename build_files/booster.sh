@@ -10,15 +10,16 @@ mkdir -p /tmp/booster
 tar --zstd -xvf /tmp/booster-0.12-1-x86_64.pkg.tar.zst -C /tmp/booster 
 rsync -a /tmp/booster/usr/ /usr/
 
-DNF fido2-tools
+DNF fido2-tools busybox
 
 cat <<EOF > /etc/booster.yaml
 # https://man.archlinux.org/man/booster.1
 network:
   dhcp: on
 universal: true
+modules: erofs,overlay
 append_all_modaliases: true
-extra_files: fido2-assert,/usr/lib/ostree
+extra_files: fido2-assert,/usr/lib/ostree,busybox
 EOF
 
 KERNEL=$(ls /usr/lib/modules)
