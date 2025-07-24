@@ -18,11 +18,14 @@ PKGS=(
     docker-cli
     open-vm-tools
     qemu-guest-agent
-    networkmanager
+    NetworkManager
 )
 
 dnf5 remove -y -q "${PKGS[@]}"
 
 DNF systemd-networkd
+
+systemctl enable systemd-networkd
+systemctl disable NetworkManager
 
 rm -rf /etc/yum.repos.d/tailscale.repo
