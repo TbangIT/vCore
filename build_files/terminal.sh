@@ -28,6 +28,8 @@ PKGS=(
    buildah
 )
 
+cp -r /terminfo /usr/share/terminfo
+
 PKGS+=( "${RUST[@]}" )
 
 DNF "${PKGS[@]}"

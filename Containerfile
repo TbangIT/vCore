@@ -7,7 +7,6 @@ ARG TAG_VERSION="stable-zfs"
 FROM scratch AS ctx
 COPY build_files /
 COPY cosign.pub /signing
-COPY /terminfo /usr/share/terminfo
 
 #0 Base Image
 FROM ${REPO_SOURCE}/${REPO_OWNER}/${BASE_IMAGE}:${TAG_VERSION}
