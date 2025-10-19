@@ -1,7 +1,7 @@
 ARG REPO_SOURCE="ghcr.io"
 ARG REPO_OWNER="ublue-os"
 ARG BASE_IMAGE="ucore-minimal"
-ARG TAG_VERSION="stable-zfs"
+ARG TAG_VERSION="stable"
 
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
