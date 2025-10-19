@@ -1,6 +1,6 @@
 ARG REPO_SOURCE="ghcr.io"
 ARG REPO_OWNER="ublue-os"
-ARG BASE_IMAGE="ucore-minimal"
+ARG BASE_IMAGE="aurora"
 ARG TAG_VERSION="stable"
 
 # Allow build scripts to be referenced without being copied into the final image
