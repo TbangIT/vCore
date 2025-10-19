@@ -24,8 +24,6 @@ PKGS=(
    inotify-tools
    tree-sitter-cli
    systemd-boot-unsigned
-   skopeo
-   buildah
 )
 
 PKGS+=( "${RUST[@]}" )
